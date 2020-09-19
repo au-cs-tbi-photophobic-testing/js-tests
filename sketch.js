@@ -1,3 +1,6 @@
+const PARENT_ID = 'first-test';
+document.getElementById(PARENT_ID).innerHTML = '';
+
 const s = (p) => {
     let ImX = 800;
     let X = [5];
@@ -19,15 +22,18 @@ const s = (p) => {
 
         button = p.createButton('Wheelbarrow');
         button.position(10, 10);
+        button.parent(PARENT_ID);
         button.mousePressed(BarrowFunc);
 
         button2 = p.createButton('Kings');
         button2.position(120, 10);
+        button2.parent(PARENT_ID);
         button2.mousePressed(KingsFunc);
 
         buttonY = p.createButton('yes');
         buttonY.size(90, 50);
         buttonY.position(625, 125);
+        buttonY.parent(PARENT_ID);
         buttonY.style('font-size', '30px', 'color', '#d4af37');
         buttonY.mousePressed(acceptFunction);
         buttonY.hide();
@@ -35,6 +41,7 @@ const s = (p) => {
         buttonN = p.createButton('no');
         buttonN.size(90, 50);
         buttonN.position(725, 125);
+        buttonN.parent(PARENT_ID);
         buttonN.style('font-size', '30px', 'color', '#d4af37');
         buttonN.mousePressed(resetFunction);
         buttonN.hide();
@@ -188,8 +195,9 @@ const s = (p) => {
 
         PrintArray() {
             console.log(this.DataArray);
+            Qualtrics.SurveyEngine.setEmbeddedData(this.DataArray);
         }
     }
 }
 
-new p5(s);
+new p5(s, PARENT_ID);
