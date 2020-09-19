@@ -1,7 +1,7 @@
 const PARENT_ID = 'first-test';
 
-const WHEELBARROW = 'Wheelbarrow_No_dots.jpg';
-const KINGS = 'KIngs.jpg';
+const WHEELBARROW = 'images/wheelbarrow.jpg';
+const KINGS = 'images/kings.jpg';
 
 // const WHEELBARROW = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_3WLViHzNu60vthr';
 // const KINGS = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_6LiALruzvScIvrf';
