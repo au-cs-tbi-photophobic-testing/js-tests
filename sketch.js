@@ -206,7 +206,9 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
             PrintArray() {
                 console.log(this.DataArray);
-                Qualtrics.SurveyEngine.setEmbeddedData(this.DataArray);
+
+                // for demo purposes
+                document.getElementById('first-test-output').innerHTML = this.DataArray;
             }
         }
     }
