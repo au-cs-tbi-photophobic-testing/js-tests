@@ -4,6 +4,8 @@ const KINGS = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.p
 
 let myData = [];
 
+
+
 Qualtrics.SurveyEngine.addOnload(function()
 {
     // Qualtrics will randomly insert &nbsp; which will mess with p5 button alignment
@@ -19,22 +21,20 @@ Qualtrics.SurveyEngine.addOnReady(function()
         let DotImage = null;
 
         p.preload = function() {
-          
-            img2 = p.loadImage(KINGS);
+            img = p.loadImage(KINGS);
         }
 
         p.setup = function() {
-            p.createCanvas(900, 900);
+            p.createCanvas(900, 800);
             p.background(100);
-       
-            img2.resize(ImX, 0);
+            img.resize(ImX, 0);
 
-  
+            button = p.createButton('Kings');
+            button.position(10, 10);
+            button.parent(PARENT_ID);
+            button.mousePressed(KingsFunc);
 
-            button2 = p.createButton('Kings');
-            button2.position(120, 10);
-            button2.parent(PARENT_ID);
-            button2.mousePressed(KingsFunc);
+
 
             buttonY = p.createButton('yes');
             buttonY.size(90, 50);
@@ -70,16 +70,27 @@ Qualtrics.SurveyEngine.addOnReady(function()
         }
 
         let acceptFunction = function() {
-            p.background(100);
             buttonY.hide();
-            buttonN.hide();
-            p.background(100);
-
+            buttonN.hide();      
             DotImage.PrintArray();
             DotImage.LoadXY(X, Y);
             DotImage.ClearDataArray();
-            DotImage.ShowXY(140);
+			button.hide();
+			p.clear();	
+			//p.background(255,255,255);	   
+			//p.text("Response logged. You may continue to next question.",50,160)
+			terminate();
+			
         }
+		
+		function terminate(){
+		p.resizeCanvas(900,200);				
+		p.background(255,255,255);
+		p.textSize(20);
+		p.textAlign(p.LEFT);
+		p.text("Response logged. Please click the button on the bottom right to continue. ",0,100) // extra params wrap text to prevent cut off
+		
+		}
 
         let resetFunction = function() {
             DotImage.LoadXY(X,Y);
@@ -89,12 +100,16 @@ Qualtrics.SurveyEngine.addOnReady(function()
             buttonN.hide();
             p.background(100);
             DotImage.ShowXY(140);
+			button.hide();
         }
 
-       
-        let KingsFunc = function() {
+       let KingsFunc = function() {
             p.background(100);
-            DotImage = new ImageClass(img2, 5, 50, 200);
+            DotImage = new ImageClass(img, 5, 50, 200);
+		   p.fill('gold')
+			p.textAlign(p.LEFT); 
+			p.textSize(30)
+			p.text("Click the dots in order from lightest to darkest ",50,100) // extra params wrap text to prevent cut off
 
             X[0] = 290;
             Y[0] = 60;
@@ -115,6 +130,7 @@ Qualtrics.SurveyEngine.addOnReady(function()
             DotImage.ClearDataArray();
             DotImage.ShowXY(140);
         }
+
 
         class ImageClass {
             constructor(Img, NDots, X0, Y0) {
@@ -180,9 +196,10 @@ Qualtrics.SurveyEngine.addOnReady(function()
                 console.log(this.DataArray);
 				Qualtrics.SurveyEngine.setEmbeddedData('kings-data',  this.DataArray.toString());
 				myData = this.DataArray;
+			
 				
                 // for demo purposes
-				document.getElementById('first-test-output').innerHTML = "<p>Output: " + this.DataArray + "</p>";
+			//	document.getElementById('first-test-output').innerHTML = "<p>Output: " + this.DataArray + "</p>";
             }
         }
     }
