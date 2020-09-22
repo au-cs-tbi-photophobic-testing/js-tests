@@ -1,10 +1,8 @@
 const PARENT_ID = 'first-test';
 
-const WHEELBARROW = 'images/wheelbarrow.jpg';
-const KINGS = 'images/kings.jpg';
+const WHEELBARROW = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_3WLViHzNu60vthr';
 
-// const WHEELBARROW = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_3WLViHzNu60vthr';
-// const KINGS = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_6LiALruzvScIvrf';
+let myData = [];
 
 Qualtrics.SurveyEngine.addOnload(function()
 {
@@ -22,24 +20,19 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
         p.preload = function() {
             img = p.loadImage(WHEELBARROW);
-            img2 = p.loadImage(KINGS);
         }
 
         p.setup = function() {
             p.createCanvas(900, 900);
             p.background(100);
             img.resize(ImX, 0);
-            img2.resize(ImX, 0);
 
             button = p.createButton('Wheelbarrow');
             button.position(10, 10);
             button.parent(PARENT_ID);
             button.mousePressed(BarrowFunc);
 
-            button2 = p.createButton('Kings');
-            button2.position(120, 10);
-            button2.parent(PARENT_ID);
-            button2.mousePressed(KingsFunc);
+
 
             buttonY = p.createButton('yes');
             buttonY.size(90, 50);
@@ -120,29 +113,6 @@ Qualtrics.SurveyEngine.addOnReady(function()
             DotImage.ShowXY(140);
         }
 
-        let KingsFunc = function() {
-            p.background(100);
-            DotImage = new ImageClass(img2, 5, 50, 200);
-
-            X[0] = 290;
-            Y[0] = 60;
-
-            X[1] = 270;
-            Y[1] = 500;
-
-            X[2] = 500;
-            Y[2] = 430;
-
-            X[3] = 650;
-            Y[3] = 170;
-
-            X[4] = 700;
-            Y[4] = 550;
-
-            DotImage.LoadXY(X, Y);
-            DotImage.ClearDataArray();
-            DotImage.ShowXY(140);
-        }
 
         class ImageClass {
             constructor(Img, NDots, X0, Y0) {
@@ -206,9 +176,11 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
             PrintArray() {
                 console.log(this.DataArray);
-
+				Qualtrics.SurveyEngine.setEmbeddedData('wheel-data',  this.DataArray.toString());
+				myData = this.DataArray;
+				
                 // for demo purposes
-                document.getElementById('first-test-output').innerHTML = this.DataArray;
+			//	document.getElementById('first-test-output').innerHTML = "<p>Output: " + this.DataArray + "</p>";
             }
         }
     }
@@ -218,6 +190,8 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
+	
+	
     /*Place your JavaScript here to run when the page is unloaded*/
 
 });
