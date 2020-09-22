@@ -4,6 +4,8 @@ const WHEELBARROW = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/
 
 let myData = [];
 
+
+
 Qualtrics.SurveyEngine.addOnload(function()
 {
     // Qualtrics will randomly insert &nbsp; which will mess with p5 button alignment
@@ -68,16 +70,25 @@ Qualtrics.SurveyEngine.addOnReady(function()
         }
 
         let acceptFunction = function() {
-            p.background(100);
             buttonY.hide();
-            buttonN.hide();
-            p.background(100);
-
+            buttonN.hide();      
             DotImage.PrintArray();
             DotImage.LoadXY(X, Y);
             DotImage.ClearDataArray();
-            DotImage.ShowXY(140);
+			button.hide();
+			p.clear();	
+			//p.background(255,255,255);	   
+			//p.text("Response logged. You may continue to next question.",50,160)
+			terminate();
+			
         }
+		
+		function terminate(){
+		p.resizeCanvas(900,200);				
+		p.background(255,255,255);
+		p.text("Response logged. Please click the button on the bottom right ",50,160)
+		
+		}
 
         let resetFunction = function() {
             DotImage.LoadXY(X,Y);
@@ -87,6 +98,7 @@ Qualtrics.SurveyEngine.addOnReady(function()
             buttonN.hide();
             p.background(100);
             DotImage.ShowXY(140);
+			button.hide();
         }
 
         let BarrowFunc = function() {
@@ -178,9 +190,10 @@ Qualtrics.SurveyEngine.addOnReady(function()
                 console.log(this.DataArray);
 				Qualtrics.SurveyEngine.setEmbeddedData('wheel-data',  this.DataArray.toString());
 				myData = this.DataArray;
+			
 				
                 // for demo purposes
-			//	document.getElementById('first-test-output').innerHTML = "<p>Output: " + this.DataArray + "</p>";
+				document.getElementById('first-test-output').innerHTML = "<p>Output: " + this.DataArray + "</p>";
             }
         }
     }
