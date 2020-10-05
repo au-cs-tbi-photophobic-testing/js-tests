@@ -1,10 +1,8 @@
-const PARENT_ID = 'first-test';
+const PARENT_ID = 'kings';
 
-const WHEELBARROW = 'images/wheelbarrow.jpg';
-const KINGS = 'images/kings.jpg';
+const KINGS = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_6LiALruzvScIvrf';
 
-// const WHEELBARROW = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_3WLViHzNu60vthr';
-// const KINGS = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_6LiALruzvScIvrf';
+let myData = [];
 
 Qualtrics.SurveyEngine.addOnload(function()
 {
@@ -21,25 +19,15 @@ Qualtrics.SurveyEngine.addOnReady(function()
         let DotImage = null;
 
         p.preload = function() {
-            img = p.loadImage(WHEELBARROW);
-            img2 = p.loadImage(KINGS);
+            img = p.loadImage(KINGS);
         }
 
         p.setup = function() {
-            p.createCanvas(900, 900);
+            p.createCanvas(900, 800);
             p.background(100);
             img.resize(ImX, 0);
-            img2.resize(ImX, 0);
 
-            button = p.createButton('Wheelbarrow');
-            button.position(10, 10);
-            button.parent(PARENT_ID);
-            button.mousePressed(BarrowFunc);
-
-            button2 = p.createButton('Kings');
-            button2.position(120, 10);
-            button2.parent(PARENT_ID);
-            button2.mousePressed(KingsFunc);
+            KingsFunc();
 
             buttonY = p.createButton('yes');
             buttonY.size(90, 50);
@@ -75,16 +63,22 @@ Qualtrics.SurveyEngine.addOnReady(function()
         }
 
         let acceptFunction = function() {
-            p.background(100);
             buttonY.hide();
-            buttonN.hide();
-            p.background(100);
-
+            buttonN.hide();      
             DotImage.PrintArray();
             DotImage.LoadXY(X, Y);
             DotImage.ClearDataArray();
-            DotImage.ShowXY(140);
+			p.clear();
+			terminate();
         }
+		
+		function terminate() {
+            p.resizeCanvas(900,200);				
+            p.background(255,255,255);
+            p.textSize(20);
+            p.textAlign(p.LEFT);
+            p.text("Response logged. Please click the button on the bottom right to continue. ", 0, 100);
+		}
 
         let resetFunction = function() {
             DotImage.LoadXY(X,Y);
@@ -96,33 +90,13 @@ Qualtrics.SurveyEngine.addOnReady(function()
             DotImage.ShowXY(140);
         }
 
-        let BarrowFunc = function() {
+       let KingsFunc = function() {
             p.background(100);
             DotImage = new ImageClass(img, 5, 50, 200);
-
-            X[0] = 120;
-            Y[0] = 100;
-
-            X[1] = 50;
-            Y[1] = 450;
-
-            X[2] = 300;
-            Y[2] = 330;
-
-            X[3] = 400;
-            Y[3] = 450;
-
-            X[4] = 700;
-            Y[4] = 50;
-
-            DotImage.LoadXY(X, Y);
-            DotImage.ClearDataArray();
-            DotImage.ShowXY(140);
-        }
-
-        let KingsFunc = function() {
-            p.background(100);
-            DotImage = new ImageClass(img2, 5, 50, 200);
+		   p.fill('gold')
+			p.textAlign(p.LEFT); 
+			p.textSize(30)
+			p.text("Click the dots in order from lightest to darkest ",50,100) // extra params wrap text to prevent cut off
 
             X[0] = 290;
             Y[0] = 60;
@@ -143,6 +117,7 @@ Qualtrics.SurveyEngine.addOnReady(function()
             DotImage.ClearDataArray();
             DotImage.ShowXY(140);
         }
+
 
         class ImageClass {
             constructor(Img, NDots, X0, Y0) {
@@ -206,9 +181,8 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
             PrintArray() {
                 console.log(this.DataArray);
-
-                // for demo purposes
-                document.getElementById('first-test-output').innerHTML = this.DataArray;
+				Qualtrics.SurveyEngine.setEmbeddedData('kings-data',  this.DataArray.toString());
+				myData = this.DataArray;
             }
         }
     }
@@ -218,6 +192,8 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
+	
+	
     /*Place your JavaScript here to run when the page is unloaded*/
 
 });
