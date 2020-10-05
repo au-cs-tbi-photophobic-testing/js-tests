@@ -1,4 +1,5 @@
 const PARENT_ID = 'brightness';
+const REPORT_ID = 'brightness-data';
 
 Qualtrics.SurveyEngine.addOnload(function()
 {
@@ -12,6 +13,9 @@ Qualtrics.SurveyEngine.addOnReady(function()
         const backcolor = 255;
         let MLDSstim = null;
 
+        let Lbutton = null;
+        let Rbutton = null;
+
         p.setup = function() {
             p.createCanvas(600, 600);
             p.background(100);
@@ -21,15 +25,15 @@ Qualtrics.SurveyEngine.addOnReady(function()
             const StimArray = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
 
             MLDSstim = new MLDS_present(StimArray);
-            MLDSstim.PrintPerumtationsArray();
+            // MLDSstim.PrintPerumtationsArray();
             MLDSstim.presentBright(backcolor);
 
-            const Lbutton = p.createButton('Center is more similar to Left');
+            Lbutton = p.createButton('Center is more similar to Left');
             Lbutton.position(0.15 * p.width, 0.75 * p.height);
             Lbutton.mousePressed(LeftPress);
 
-            const Rbutton = p.createButton('Center is more similar to Right');
-            Rbutton.position(0.65 * p.widith, 0.75 * p.height);
+            Rbutton = p.createButton('Center is more similar to Right');
+            Rbutton.position(0.65 * p.width, 0.75 * p.height);
             Rbutton.mousePressed(RightPress);
         }
 
@@ -88,9 +92,21 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
                 p.fill(200);
                 p.textSize(30);
-                p.text('Done. Thank You', p.width / 2, -40, p.height / 2);
+                p.text('Done. Thank You', p.width / 2 - 40, p.height / 2);
 
-                this.PrintResults();
+                Lbutton.hide();
+                Rbutton.hide();
+
+                // this.PrintResults();
+                this.SendResults();
+            }
+
+            SendResults() {
+                const results = [];
+                for (let i = 0; i < this.PermutationArray.length; i++) {
+                    results.push(this.Response[i] + ' ' + this.PermutationArray[i][0] + ' ' + this.PermutationArray[i][1] + ' ' + this.PermutationArray[i][2]);
+                }
+                Qualtrics.SurveyEngine.setEmbeddedData(REPORT_ID,  results.toString());
             }
 
             PrintResults() {
