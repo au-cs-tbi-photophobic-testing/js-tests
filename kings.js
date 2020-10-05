@@ -1,10 +1,8 @@
-const PARENT_ID = 'first-test';
+const PARENT_ID = 'kings';
 
 const KINGS = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_6LiALruzvScIvrf';
 
 let myData = [];
-
-
 
 Qualtrics.SurveyEngine.addOnload(function()
 {
@@ -29,12 +27,7 @@ Qualtrics.SurveyEngine.addOnReady(function()
             p.background(100);
             img.resize(ImX, 0);
 
-            button = p.createButton('Kings');
-            button.position(10, 10);
-            button.parent(PARENT_ID);
-            button.mousePressed(KingsFunc);
-
-
+            KingsFunc();
 
             buttonY = p.createButton('yes');
             buttonY.size(90, 50);
@@ -75,21 +68,16 @@ Qualtrics.SurveyEngine.addOnReady(function()
             DotImage.PrintArray();
             DotImage.LoadXY(X, Y);
             DotImage.ClearDataArray();
-			button.hide();
-			p.clear();	
-			//p.background(255,255,255);	   
-			//p.text("Response logged. You may continue to next question.",50,160)
+			p.clear();
 			terminate();
-			
         }
 		
-		function terminate(){
-		p.resizeCanvas(900,200);				
-		p.background(255,255,255);
-		p.textSize(20);
-		p.textAlign(p.LEFT);
-		p.text("Response logged. Please click the button on the bottom right to continue. ",0,100) // extra params wrap text to prevent cut off
-		
+		function terminate() {
+            p.resizeCanvas(900,200);				
+            p.background(255,255,255);
+            p.textSize(20);
+            p.textAlign(p.LEFT);
+            p.text("Response logged. Please click the button on the bottom right to continue. ", 0, 100);
 		}
 
         let resetFunction = function() {
@@ -100,7 +88,6 @@ Qualtrics.SurveyEngine.addOnReady(function()
             buttonN.hide();
             p.background(100);
             DotImage.ShowXY(140);
-			button.hide();
         }
 
        let KingsFunc = function() {
@@ -196,10 +183,6 @@ Qualtrics.SurveyEngine.addOnReady(function()
                 console.log(this.DataArray);
 				Qualtrics.SurveyEngine.setEmbeddedData('kings-data',  this.DataArray.toString());
 				myData = this.DataArray;
-			
-				
-                // for demo purposes
-			//	document.getElementById('first-test-output').innerHTML = "<p>Output: " + this.DataArray + "</p>";
             }
         }
     }

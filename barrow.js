@@ -1,10 +1,8 @@
-const PARENT_ID = 'first-test';
+const PARENT_ID = 'barrow';
 
 const WHEELBARROW = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_3WLViHzNu60vthr';
 
 let myData = [];
-
-
 
 Qualtrics.SurveyEngine.addOnload(function()
 {
@@ -29,12 +27,7 @@ Qualtrics.SurveyEngine.addOnReady(function()
             p.background(100);
             img.resize(ImX, 0);
 
-            button = p.createButton('Wheelbarrow');
-            button.position(10, 10);
-            button.parent(PARENT_ID);
-            button.mousePressed(BarrowFunc);
-
-
+            BarrowFunc();
 
             buttonY = p.createButton('yes');
             buttonY.size(90, 50);
@@ -75,19 +68,14 @@ Qualtrics.SurveyEngine.addOnReady(function()
             DotImage.PrintArray();
             DotImage.LoadXY(X, Y);
             DotImage.ClearDataArray();
-			button.hide();
 			p.clear();	
-			//p.background(255,255,255);	   
-			//p.text("Response logged. You may continue to next question.",50,160)
 			terminate();
-			
         }
 		
-		function terminate(){
-		p.resizeCanvas(900,200);				
-		p.background(255,255,255);
-		p.text("Response logged. Please click the button on the bottom right ",50,160)
-		
+		function terminate() {
+            p.resizeCanvas(900,200);				
+            p.background(255,255,255);
+            p.text("Response logged. Please click the button on the bottom right ", 50, 160)
 		}
 
         let resetFunction = function() {
@@ -98,7 +86,6 @@ Qualtrics.SurveyEngine.addOnReady(function()
             buttonN.hide();
             p.background(100);
             DotImage.ShowXY(140);
-			button.hide();
         }
 
         let BarrowFunc = function() {
@@ -190,10 +177,6 @@ Qualtrics.SurveyEngine.addOnReady(function()
                 console.log(this.DataArray);
 				Qualtrics.SurveyEngine.setEmbeddedData('wheel-data',  this.DataArray.toString());
 				myData = this.DataArray;
-			
-				
-                // for demo purposes
-				document.getElementById('first-test-output').innerHTML = "<p>Output: " + this.DataArray + "</p>";
             }
         }
     }
@@ -203,8 +186,5 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
-	
-	
     /*Place your JavaScript here to run when the page is unloaded*/
-
 });
