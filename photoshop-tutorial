@@ -1,0 +1,18 @@
+Photoshop filter:
+
+1. window ---> info to pull up x and y coordinates of mouse
+2. measure width of dot (2 ways to do this) IN PIXELS:
+  - by taking 2 points (x1 and y1) of dots and subtracting
+  - drag direct selection took accross dot and take W from info screen
+ 3. Record RBG values from darkest to lightest
+
+
+
+
+
+
+
+Filter key:
+wheel barrow:
+- 15.2(x2) - 13.95(x1) = 1.25
+- 1095px - px1005 = 90 pixels

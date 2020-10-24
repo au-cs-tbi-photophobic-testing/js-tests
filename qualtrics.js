@@ -21,7 +21,7 @@ class SurveyEngine {
         window.onunload = callback;
     }
 
-    setEmbeddedData(key, value) {
+    setEmbeddedData(key, data) {
         
     }
 }
