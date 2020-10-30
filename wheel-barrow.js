@@ -1,5 +1,7 @@
 const PARENT_ID = 'wheelbarrow';
 
+const filter_applied = 90;
+
 const EMBEDDED_DATA = 'wheel-data';
 
 const INSTRUCTIONS = 'Click the dots in order from darkest to lightest';
@@ -10,7 +12,7 @@ const IMAGE = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.p
 const c1 = [300,330]
 const c2 = [700,50]
 const c3 = [120,100]
-const c4 = [50,450]
+const c4 = [95,450]
 const c5 = [400,450]
 
 const LOCATIONS = [
@@ -18,12 +20,12 @@ const LOCATIONS = [
 ];
 
 DOT_SIZE = 30;
-
+ 
 TEXT_SIZE = 30;
 
-const BACKGROUND_COLOR = 100;
+const BACKGROUND_COLOR = 85;
 
-const DOT_COLOR = 140;
+const DOT_COLOR = 160;
 
 const TEXT_COLOR = '#D4AF37';
 
@@ -33,11 +35,14 @@ Qualtrics.SurveyEngine.addOnload(function() {
 });
 
 Qualtrics.SurveyEngine.addOnReady(function() {
-    const s = function(p) {
+    document.getElementById('NextButton').disabled = true;
+	
+	const s = function(p) {
         let img = null;
         let dotImage = null;
         let buttonY = null;
         let buttonN = null;
+		let buttonH = null;
 
         p.preload = function() {
             img = p.loadImage(IMAGE);
@@ -65,9 +70,25 @@ Qualtrics.SurveyEngine.addOnReady(function() {
             buttonN.position(725, 125);
             buttonN.parent(PARENT_ID);
             buttonN.style('font-size', '30px', 'color', TEXT_COLOR);
-            buttonN.mousePressed(reset);
+       		buttonN.mousePressed(reset);
             buttonN.hide();
+		
+			buttonH = p.createButton("Can't find a dot?");
+            buttonH.size(300, 50);
+            buttonH.position(100, 125);
+            buttonH.parent(PARENT_ID);
+            buttonH.style('font-size', '30px', 'color', TEXT_COLOR);
+		//	buttonH.mousePressed(highlight);
+		
+			           		
+			
         }
+		
+		p.draw = function(){
+			buttonH.mousePressed(highlight);
+			buttonH.mouseReleased(unhighlight);
+			
+		}
 
         p.mousePressed = function() {
             let mx = p.mouseX;
@@ -80,6 +101,7 @@ Qualtrics.SurveyEngine.addOnReady(function() {
                     p.text("Finished: are you satisfied with this order?", 50, 160);
                     buttonY.show();
                     buttonN.show();
+					buttonH.hide();
                     dotImage.end = false;
                 }
             }
@@ -104,15 +126,39 @@ Qualtrics.SurveyEngine.addOnReady(function() {
             p.textAlign(p.LEFT);
             p.text('Response logged. Please click button on the bottom right to continue.', 0, 100);
         }
+		
+		const highlight = function(){
+			dotImage.highlight();
+			
+		}
+		const unhighlight = function(){
+			dotImage.unhighlight();
+			
+		}
 
         const reset = function() {
             p.background(BACKGROUND_COLOR);
             dotImage.reset();
             buttonY.hide();
             buttonN.hide();
+			buttonH.show();
             instructions();
             dotImage.showXY(DOT_COLOR);
         }
+		
+		
+		function draw(){
+				if (keyIsPressed === true) {
+				highlight;
+				
+				}
+
+			
+		}
+	
+		
+
+						  
 
         class Image {
             constructor(img, imgX, imgY) {
@@ -122,12 +168,13 @@ Qualtrics.SurveyEngine.addOnReady(function() {
                 this.nDots = LOCATIONS.length;
                 this.dotSize = DOT_SIZE;
                 this.reset();
+				this.highlight();
             }
 
             showXY(color) {
                 p.image(this.img, this.imgX, this.imgY);
-                p.ellipseMode(p.CENTER);
-                p.fill(color);
+            	p.fill(color);   
+				p.ellipseMode(p.CENTER);
                 p.noStroke();
                 for (let i = 0; i < this.nDots; i++) {
                     p.ellipse(LOCATIONS[i][0] + this.imgX, LOCATIONS[i][1] + this.imgY, this.dotSize, this.dotSize);
@@ -162,10 +209,34 @@ Qualtrics.SurveyEngine.addOnReady(function() {
                     this.end = true;
                 }
             }
+	
+			highlight(){
+				p.fill(255, 239, 0,72);
+				for(var i = 0; i < 5; i++){
+					if(this.data[i] == 0){
+						p.ellipse(LOCATIONS[i][0]+ this.imgX, LOCATIONS[i][1] + this.imgY, this.dotSize , this.dotSize );				
+				}
+			}
+					
+				p.fill(160);
+				
+		}
+	unhighlight(){
+		p.fill(160);
+		for(var i = 0; i < 5; i++){
+					if(this.data[i] == 0){
+						p.ellipse(LOCATIONS[i][0]+ this.imgX, LOCATIONS[i][1] + this.imgY, this.dotSize , this.dotSize );				
+				}
+		
+	}
+	}
+
+	
 
             print() {
                 console.log(this.data);
                 Qualtrics.SurveyEngine.setEmbeddedData(EMBEDDED_DATA, this.data.toString());
+                document.getElementById('NextButton').disabled = false;
             }
         }
     }
