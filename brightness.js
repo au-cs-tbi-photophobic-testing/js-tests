@@ -118,7 +118,7 @@ Qualtrics.SurveyEngine.addOnReady(function()
             }
 
             recordResponse(Answer) {
-                this.Response[this.PresentationOrder[this.PResentNumber]] = Answer;
+                this.Response[this.PresentationOrder[this.PresentNumber]] = Answer;
                 this.PresentNumber++;
 
                 if (this.PresentNumber < this.PermutationArray.length) {
