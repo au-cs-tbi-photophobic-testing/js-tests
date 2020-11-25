@@ -1,0 +1,105 @@
+
+Justice: 
+For both good and bad visions: Plot the average of ALL the graphs (good vis has one avg graph) (bad vis has one average graph) ---> after I remove the ones who didn’t spend a lot of time on the survey
+Redo all rankings so they are 1 - 5 except gradient (text me)
+Scale everything to screen dimensions for photo study
+Add something that highlights all the dots before the each picture test starts. After user clicks each dot (thereby showing they know where all the dots are) then they can begin the actual test 
+Bella
+Take 5 different filters for each photo ( = 50 filters)
+Original/ fallback ranking will be the circle diameter)
+See excel file for other filter sizes
+Use tutorial i put on github decades ago
+Match everyone's answers up to those filter sizes = 20 respondents x 10 questions = 200 different rankings 
+20 total tables
+Run the survey again on Mturk
+Manage hit requests
+Collect browser metadata and toss any phone screens
+Toss any that don’t get random ID correct
+Add 2 more numbers to random ID to make it easier to tell which are real 
+Write down the amount of minutes it took to do each one for test 2
+Change: instead of light to dark, what that means - (closer to white vs closer to black)
+Figure out how to randomize all the qualtrics questions in one block while still being able to do the data embeds
+Add buttons discussed in meeting
+Clean up the code for the deliverable & to make documentation easier
+Avery
+Take the photo tests and answer perfectly on all of them (you can see the rankings in the code) A perfect score is 5,4,3,2,1 except the gradient. Look at the locations (x & y) of the dots to know which is which - this will be annoying to do or at least it was for me I ended up getting a piece of paper and jotting out which dot ranking was at which location and I can’t find it to send you </3. You want to click c5 first, then c4, and so on. If all the data comes back as 5,4,3,2,1 all is well
+Will be doing some other excel stuff from 20 tables I give you. Shapiro did an example on one of them so I think you can reproduce no problem. If not reach out to him and he will explain
+
+
+
+Avery or Justice - call me will explain better
+Video Tutorial: ---> need done ASAP so can run again on Mturk
+Problem: we think that people are selecting dots with the greatest amount of contrast - record a video explaining they should be selecting dots from closest to least close to white
+
+Need by December 6
+Stuff we need to Accomplish before December 6 (proj due date) put ya names next to what you wanna do
+Presentation
+Documentation
+Paper 
+Write about the science, tbi stuff, horizontal cells Bella 
+Write about high pass filters Bella 
+Write about data 
+Collecting, embedding, etc Bella 
+Mturk Bella 
+IRB Bella 
+r^2 Avery
+Mlds justice
+Why it’s useful, important, who needs it etc (all)
+Clean up github (my bad lol)
+Add a read me that explains what’s up and how to use this
+Vastly improve UI of both tests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
