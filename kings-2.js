@@ -1,8 +1,9 @@
 const PARENT_ID = 'kings';
 
-const EMBEDDED_DATA = 'kings-data';
+const EMBEDDED_DATA = 'kings-data-2';
 
 const INSTRUCTIONS = 'Click the dots in order from lightest to darkest';
+
 const IMAGE = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_6LiALruzvScIvrf';
 
 const filters = [34,105,145,170,192]
@@ -19,7 +20,7 @@ const LOCATIONS = [
 
 ];
 
-DOT_SIZE = 30;
+DOT_SIZE = 30/2;
 
 TEXT_SIZE = 30;
 
@@ -72,13 +73,11 @@ Qualtrics.SurveyEngine.addOnReady(function() {
        		buttonN.mousePressed(reset);
             buttonN.hide();
 		
-			buttonH = p.createButton("Click and hold to illuminate all 5 dots before making selections");
+				buttonH = p.createButton("Click and hold to illuminate all 5 dots before making selections");
              buttonH.size(700, 70);
             buttonH.position(20, 125);
             buttonH.parent(PARENT_ID);
             buttonH.style('font-size', '30px', 'color', TEXT_COLOR);
-				
-		
 			           		
 			
         }

@@ -1,31 +1,31 @@
-const PARENT_ID = 'kings';
+const PARENT_ID = 'wheelbarrow';
 
-const EMBEDDED_DATA = 'kings-data';
+const filter_applied = 90;
+
+const EMBEDDED_DATA = 'wheel-data-2';
 
 const INSTRUCTIONS = 'Click the dots in order from lightest to darkest';
-const IMAGE = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_6LiALruzvScIvrf';
 
-const filters = [34,105,145,170,192]
+const IMAGE = 'https://american.co1.qualtrics.com/WRQualtricsControlPanel/File.php?F=F_3WLViHzNu60vthr';
 
-// lightest to darkest
-const c1 = [700,525]
-const c2 = [270,500]
-const c3 = [650,170]
-const c4 = [500,430]
-const c5 = [290,60]
+// dot coords in order from lightest to darkest
+const c1 = [400,450]
+const c2 = [95,450]
+const c3 = [120,100]
+const c4 = [700,50]
+const c5 = [300,330]
 
 const LOCATIONS = [
-  c1,c2,c3,c4,c5
-
+    c1,c2,c3,c4,c5
 ];
 
-DOT_SIZE = 30;
-
+DOT_SIZE = 30/2;
+ 
 TEXT_SIZE = 30;
 
-const BACKGROUND_COLOR = 100;
+const BACKGROUND_COLOR = 85;
 
-const DOT_COLOR = 140;
+const DOT_COLOR = 160;
 
 const TEXT_COLOR = '#D4AF37';
 
@@ -36,7 +36,8 @@ Qualtrics.SurveyEngine.addOnload(function() {
 
 Qualtrics.SurveyEngine.addOnReady(function() {
     document.getElementById('NextButton').disabled = true;
-   const s = function(p) {
+	
+	const s = function(p) {
         let img = null;
         let dotImage = null;
         let buttonY = null;
@@ -73,11 +74,11 @@ Qualtrics.SurveyEngine.addOnReady(function() {
             buttonN.hide();
 		
 			buttonH = p.createButton("Click and hold to illuminate all 5 dots before making selections");
-             buttonH.size(700, 70);
+            buttonH.size(700, 70);
             buttonH.position(20, 125);
             buttonH.parent(PARENT_ID);
             buttonH.style('font-size', '30px', 'color', TEXT_COLOR);
-				
+
 		
 			           		
 			

@@ -1,5 +1,5 @@
 const PARENT_ID = 'brightness';
-const REPORT_ID = 'brightness-data';
+const REPORT_ID = 'brightness-data-2';
 
 Qualtrics.SurveyEngine.addOnload(function()
 {
@@ -12,7 +12,7 @@ Qualtrics.SurveyEngine.addOnReady(function()
     document.getElementById('NextButton').disabled = true;
 	
     const s = function(p) {
-        const backcolor = 255;
+        const backcolor = 0;
         let MLDSstim = null;
 
         let Lbutton = null;
